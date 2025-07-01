@@ -1,3 +1,3 @@
-module pertemuan1
+module github.com/fandiaji45/golang-academy
 
-go 1.24.1
+go 1.21
