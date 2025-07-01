@@ -18,12 +18,12 @@ func (u Account) GetNama() string {
 	return u.nama
 }
 
-func main() {
+func JalankanImplementasi() {
 	// Membuat objek Account
-	u := Account{Username: "rahmatrdn"}
+	u := Account{Username: "Fandi"}
 
 	// Mengisi field private 'nama' lewat method SetNama
-	u.SetNama("Rahmat Ramadhan Putra")
+	u.SetNama("Fandi Aji")
 
 	// Menampilkan hasil
 	fmt.Println("Username:", u.Username)      // Bisa langsung akses karena public
