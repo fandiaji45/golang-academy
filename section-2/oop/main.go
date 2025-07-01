@@ -12,5 +12,5 @@ func main() {
 	userUsecase := usecase.NewUserUsecase(senderUsecase)
 
 	// Registrasi user baru dengan email tertentu
-	userUsecase.RegistrasiUser("rahmatrdn@mail.com")
+	userUsecase.RegistrasiUser("fndwbw688@gmail.com")
 }
