@@ -25,6 +25,7 @@ func JalankanImplementasi() {
 	// Mengisi field private 'nama' lewat method SetNama
 	u.SetNama("Fandi Aji")
 
+	
 	// Menampilkan hasil
 	fmt.Println("Username:", u.Username)      // Bisa langsung akses karena public
 	fmt.Println("Nama lengkap:", u.GetNama()) // Akses nama via method (enkapsulasi)
