@@ -7,7 +7,11 @@ meta {
 post {
   url: {{url}}/api/v1/todo-lists
   body: json
-  auth: inherit
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTIwODUyODYsInVzZXJfaWQiOjksImVtYWlsIjoiZm5kd2J3Njg4QGdtYWlsLmNvbSIsInJvbGUiOjJ9.NXGBE1abcQGD2gawWEhySkwnC9r07ddU3nbiEUeWKOOahuQrcQptCnat5dNxEaW1KsjQ-UoHjyH84Ja3_EDN-bPmWis4XRWZqpMCg6V1R1l7L2JA62tPyb2TZMec4yleiSFHKaI-7Jm0VXCsni480Pe5ZELNFJ1C6MEMbvZE0eIUPfm7-GsjI8YR_a-spdJsKEuQHgeu3iwWUQwVqkvZeC8DyYK-mSxCAWDCu1XkuzJcMllvCof-oHblNGCb7LBS_uXeg4HVz6us_GevdHL0YQ2lOu7j1uQciLYQu7iJ8_JZUfZSoJWXuqzlOZLFXtjhPBra4U70c8UXz8x5eufOCw
 }
 
 body:json {
