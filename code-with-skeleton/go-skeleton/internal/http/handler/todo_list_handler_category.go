@@ -18,7 +18,7 @@ type TodoListCategoryHandler struct {
 	todoListCategoryCrudUsecase todo_list_category_usecase.ICrudTodoListCategoryUsecase
 }
 
-func NewTodoListHandler(
+func NewTodoListCategoryHandler(
 	parser parser.Parser,
 	presenter json.JsonPresenter,
 	todoListCategoryCrudUsecase todo_list_category_usecase.ICrudTodoListCategoryUsecase,
