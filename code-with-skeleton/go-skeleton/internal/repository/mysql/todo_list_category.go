@@ -5,7 +5,6 @@ import (
 
 	"github.com/rahmatrdn/go-skeleton/config"
 	"github.com/rahmatrdn/go-skeleton/internal/helper"
-	"github.com/rahmatrdn/go-skeleton/internal/repository/mysql/entity"
 
 	"github.com/fandiaji45/golang-academy/code-with-skeleton/go-skeleton/internal/repository/mysql/entity"
 
