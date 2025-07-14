@@ -1,0 +1,18 @@
+meta {
+  name: Update
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{url}}/api/v1/todo-lists-category/2
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "title" : "Buyer",
+    "description" : "Buyer PT.ABCX"
+  }
+}

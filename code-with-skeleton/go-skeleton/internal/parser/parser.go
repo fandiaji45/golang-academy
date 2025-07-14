@@ -16,9 +16,19 @@ type WithPathID interface {
 type WithUserID interface {
 	SetUserID(int64)
 }
+
+type WithCreatedBy interface {
+	SetCreatedBy(int64)
+}
+
 type WithPathIDAndUserID interface {
 	SetID(int64)
 	SetUserID(int64)
+}
+
+type WithPathIDAndCreatedBy interface {
+	SetID(int64)
+	SetCreatedBy(int64)
 }
 
 type BodyRequest interface{}
@@ -39,6 +49,8 @@ type Parser interface {
 	// It returns an error if parsing fails.
 	ParserBodyRequestWithUserID(c *fiber.Ctx, req WithUserID) error
 
+	ParserBodyRequestWithCreatedBy(c *fiber.Ctx, req WithCreatedBy) error
+
 	// ParserBodyWithIntIDPathParams parses the request body into the provided struct and extracts an integer ID from the request path parameters.
 	// It returns an error if parsing fails.
 	ParserBodyWithIntIDPathParams(c *fiber.Ctx, req WithPathID) error
@@ -46,6 +58,8 @@ type Parser interface {
 	// ParserBodyWithIntIDPathParamsAndUserID parses the request body into the provided struct, extracts an integer ID from the request path parameters,
 	// and extracts the user ID from the request context. It returns an error if parsing fails.
 	ParserBodyWithIntIDPathParamsAndUserID(c *fiber.Ctx, req WithPathIDAndUserID) error
+
+	ParserBodyWithIntIDPathParamsAndCreatedBy(c *fiber.Ctx, req WithPathIDAndCreatedBy) error
 
 	ParseQueryParams(c *fiber.Ctx, req QueryParamsRequest) error
 }
@@ -118,6 +132,37 @@ func (p *RequestParser) ParserBodyRequestWithUserID(c *fiber.Ctx, req WithUserID
 	userID := c.Locals("user_id").(int64)
 
 	req.SetUserID(userID)
+
+	return nil
+}
+
+func (p *RequestParser) ParserBodyRequestWithCreatedBy(c *fiber.Ctx, req WithCreatedBy) error {
+	if err := p.ParserBodyRequest(c, req); err != nil {
+		return err
+	}
+
+	createdBy := c.Locals("user_id").(int64)
+	req.SetCreatedBy(createdBy)
+
+	return nil
+}
+
+func (p *RequestParser) ParserBodyWithIntIDPathParamsAndCreatedBy(c *fiber.Ctx, req WithPathIDAndCreatedBy) error {
+	if err := p.ParserBodyRequest(c, req); err != nil {
+		return err
+	}
+
+	id := helper.ToInt64(c.Params("id"))
+	if id == 0 {
+		return fmt.Errorf("PATH PARAM ID EMPTY")
+	}
+	req.SetID(id)
+
+	createdBy := c.Locals("user_id").(int64)
+	if createdBy == 0 {
+		return fmt.Errorf("CREATED BY EMPTY")
+	}
+	req.SetCreatedBy(createdBy)
 
 	return nil
 }

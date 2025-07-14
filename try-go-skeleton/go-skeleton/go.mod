@@ -1,4 +1,4 @@
-module github.com/fandiaji45/golang-academy
+module github.com/rahmatrdn/go-skeleton
 
 go 1.24.1
 

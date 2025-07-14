@@ -6,7 +6,7 @@ import (
 	"github.com/rahmatrdn/go-skeleton/config"
 	"github.com/rahmatrdn/go-skeleton/internal/helper"
 
-	"github.com/fandiaji45/golang-academy/code-with-skeleton/go-skeleton/internal/repository/mysql/entity"
+	"github.com/rahmatrdn/go-skeleton/internal/repository/mysql/entity"
 
 	apperr "github.com/rahmatrdn/go-skeleton/error"
 
@@ -32,14 +32,14 @@ func NewTodoListCategoryRepository(mysql *config.Mysql) *TodoListCategoryReposit
 	return &TodoListCategoryRepository{GormTrxSupport{db: mysql.DB}}
 }
 
-func (r *TodoListCategoryRepository) GetCreatedBy(ctx context.Context, CreatedBy int64) (result []*entity.TodoListCategory, err error) {
-	funcName := "TodoListCategoryRepository.GetCreatedBy"
+func (r *TodoListCategoryRepository) GetByUserID(ctx context.Context, ID int64) (result []*entity.TodoListCategory, err error) {
+	funcName := "TodoListCategoryRepository.GetByUserID"
 
 	if err := helper.CheckDeadline(ctx); err != nil {
 		return nil, errwrap.Wrap(err, funcName)
 	}
 
-	err = r.db.Raw("SELECT * FROM todo_list_categories WHERE created_by = ?", CreatedBy).Scan(&result).Error
+	err = r.db.Raw("SELECT * FROM todo_list_categories WHERE created_by = ?", ID).Scan(&result).Error
 	if errwrap.Is(err, gorm.ErrRecordNotFound) {
 		return nil, apperr.ErrRecordNotFound()
 	}

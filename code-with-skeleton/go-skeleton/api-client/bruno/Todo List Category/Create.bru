@@ -1,0 +1,22 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{url}}/api/v1/todo-lists-category
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJSUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTI3NDU5NzYsInVzZXJfaWQiOjksImVtYWlsIjoiZm5kd2J3Njg4QGdtYWlsLmNvbSIsInJvbGUiOjJ9.pmO3w5fwDDuI4kf88TnMgcveCT4C2xr3IUfkV7GhPt4hvoTWnUe1lJ97EPErk1C8VYBEkY3DI7QW8FJxvGJo1sPiGF0OKACjKGxcAsRmtpzf-RfVRRlr5xi_lGDRv5H5I5wTFeOe6GzB5ysLJZoYuknHr4NIh3piCISgaihEO1MXVMjiG_rDNPuIWd5suFhyUsSNzZNSrPPgDBBa4S9FVtDOUHFEyi9rAcR_-rHY-ZbSXLVCtdAbEU5PFMEXz4LLQSh__aPhq5Cqm3Ft0rCSnuhQswsCHWb-LoTG9PfHpAhcNMLqzCMRNr8YRx3zWQ-K54kEdl0r2fJcQmKur3woEQ
+}
+
+body:json {
+  {
+    "name" : "buyer",
+    "description" : "Payemnt toko ABC"
+  }
+}

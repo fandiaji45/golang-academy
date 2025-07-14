@@ -11,7 +11,10 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/monitor"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/swagger"
 	"github.com/rahmatrdn/go-skeleton/config"
 	_ "github.com/rahmatrdn/go-skeleton/docs"
@@ -23,10 +26,7 @@ import (
 	"github.com/rahmatrdn/go-skeleton/internal/repository/mysql"
 	"github.com/rahmatrdn/go-skeleton/internal/usecase"
 	todo_list_usecase "github.com/rahmatrdn/go-skeleton/internal/usecase/todo_list"
-
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/gofiber/fiber/v2/middleware/recover"
+	todo_list_category_usecase "github.com/rahmatrdn/go-skeleton/internal/usecase/todo_list_category"
 	"github.com/subosito/gotenv"
 )
 
@@ -92,16 +92,17 @@ func main() {
 	// REPOSITORY : Write repository code here (database, cache, etc.)
 	userRepo := mysql.NewUserRepository(mysqlDB)
 	todoListRepo := mysql.NewTodoListRepository(mysqlDB)
-
+	todoListCategoryRepo := mysql.NewTodoListCategoryRepository(mysqlDB)
 	// USECASE : Write bussines logic code here (validation, business logic, etc.)
 	// _ = usecase.NewLogUsecase(queue)  // LogUsecase is a sample usecase for sending log to queue (Mongodb, ElasticSearch, etc.)
 	userUsecase := usecase.NewUserUsecase(userRepo, jwtAuth)
 	crudTodoListUsecase := todo_list_usecase.NewCrudTodoListUsecase(todoListRepo)
-
+	crudTodoListCategoryUsecase := todo_list_category_usecase.NewCrudTodoListCategoryUsecase(todoListCategoryRepo)
 	api := app.Group("/api/v1")
 
 	handler.NewAuthHandler(parser, presenterJson, userUsecase).Register(api)
 	handler.NewTodoListHandler(parser, presenterJson, crudTodoListUsecase).Register(api)
+	handler.NewTodoListCategoryHandler(parser, presenterJson, crudTodoListCategoryUsecase).Register(api)
 
 	app.Get("/health-check", healthCheck)
 	app.Get("/metrics", monitor.New())
